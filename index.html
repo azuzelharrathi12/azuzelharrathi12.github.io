@@ -1,249 +1,515 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="ZAKVORA Technologies Limited — Data Analytics, Research, AI, Digital Innovation and ICT Training.">
-  <title>ZAKVORA Technologies Limited</title>
-  <link rel="icon" href="logo.png">
-  <style>
-    :root{
-      --navy:#071a45; --blue:#0878e8; --cyan:#19b9ff; --ink:#10204a;
-      --muted:#667085; --light:#f5f8fc; --white:#fff; --line:#dfe7f1;
-      --shadow:0 18px 45px rgba(7,26,69,.10); --radius:22px;
-    }
-    *{box-sizing:border-box;margin:0;padding:0}
-    html{scroll-behavior:smooth}
-    body{font-family:Inter,Segoe UI,Arial,sans-serif;color:var(--ink);background:#fff;line-height:1.6}
-    a{text-decoration:none;color:inherit}
-    img{max-width:100%;display:block}
-    .container{width:min(1120px,92%);margin:auto}
-    header{position:sticky;top:0;z-index:50;background:rgba(255,255,255,.96);backdrop-filter:blur(12px);border-bottom:1px solid var(--line)}
-    .nav{height:78px;display:flex;align-items:center;justify-content:space-between;gap:24px}
-    .brand img{width:235px;height:auto}
-    .navlinks{display:flex;align-items:center;gap:25px;font-weight:600;font-size:14px}
-    .navlinks a:hover{color:var(--blue)}
-    .navcta{background:var(--navy);color:#fff;padding:11px 18px;border-radius:12px}
-    .menu{display:none;border:0;background:none;font-size:27px;color:var(--navy)}
-    .hero{background:linear-gradient(135deg,#f7fbff 0%,#fff 55%,#eef7ff 100%);padding:85px 0 75px;overflow:hidden}
-    .hero-grid{display:grid;grid-template-columns:1.08fr .92fr;align-items:center;gap:55px}
-    .eyebrow{display:inline-flex;align-items:center;gap:9px;color:var(--blue);font-weight:800;letter-spacing:.12em;font-size:13px;text-transform:uppercase;margin-bottom:18px}
-    .eyebrow:before{content:"";width:34px;height:3px;background:var(--blue);border-radius:9px}
-    h1{font-size:clamp(42px,6vw,72px);line-height:1.02;letter-spacing:-.045em;color:var(--navy);margin-bottom:22px}
-    h1 span{color:var(--blue)}
-    .hero p{font-size:18px;color:#52617a;max-width:650px}
-    .actions{display:flex;gap:13px;flex-wrap:wrap;margin-top:30px}
-    .btn{padding:14px 21px;border-radius:13px;font-weight:800;display:inline-flex;align-items:center;gap:8px}
-    .btn-primary{background:var(--blue);color:#fff;box-shadow:0 10px 25px rgba(8,120,232,.2)}
-    .btn-secondary{border:1px solid var(--line);background:#fff;color:var(--navy)}
-    .hero-card{background:var(--navy);color:#fff;border-radius:28px;padding:34px;box-shadow:var(--shadow);position:relative;overflow:hidden}
-    .hero-card:after{content:"";position:absolute;width:190px;height:190px;border:35px solid rgba(25,185,255,.16);border-radius:50%;right:-75px;top:-70px}
-    .hero-card h2{font-size:30px;line-height:1.15;margin-bottom:12px}
-    .hero-card p{color:#d7e5ff;font-size:15px}
-    .mini-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:25px}
-    .mini{border:1px solid rgba(255,255,255,.15);background:rgba(255,255,255,.06);padding:17px;border-radius:15px}
-    .mini strong{display:block;font-size:20px;color:#fff}.mini span{font-size:12px;color:#bcd0ee}
-    section{padding:82px 0}
-    .section-head{display:flex;justify-content:space-between;align-items:end;gap:30px;margin-bottom:38px}
-    .section-head h2{font-size:clamp(30px,4vw,44px);line-height:1.1;color:var(--navy)}
-    .section-head p{max-width:540px;color:var(--muted)}
-    .services{background:#fff}
-    .cards{display:grid;grid-template-columns:repeat(5,1fr);gap:15px}
-    .card{border:1px solid var(--line);border-radius:18px;padding:24px;background:#fff;transition:.2s;box-shadow:0 5px 18px rgba(7,26,69,.035)}
-    .card:hover{transform:translateY(-4px);box-shadow:var(--shadow)}
-    .icon{width:48px;height:48px;border-radius:14px;background:#eaf5ff;color:var(--blue);display:grid;place-items:center;font-size:23px;font-weight:900;margin-bottom:17px}
-    .card h3{font-size:17px;margin-bottom:8px;color:var(--navy)}
-    .card p{font-size:13px;color:var(--muted)}
-    .about{background:var(--light)}
-    .about-grid{display:grid;grid-template-columns:1fr 1fr;gap:28px}
-    .panel{background:#fff;border:1px solid var(--line);border-radius:var(--radius);padding:34px;box-shadow:0 8px 30px rgba(7,26,69,.04)}
-    .panel h3{font-size:24px;color:var(--navy);margin-bottom:12px}
-    .panel p{color:var(--muted)}
-    .training{background:var(--navy);color:#fff}
-    .training .section-head h2{color:#fff}.training .section-head p{color:#cbd8ef}
-    .training-grid{display:grid;grid-template-columns:1fr 1fr;gap:20px}
-    .course{border-radius:22px;padding:30px;background:#fff;color:var(--ink);position:relative;overflow:hidden}
-    .course.advanced{background:linear-gradient(145deg,#0d2b67,#071a45);color:#fff;border:1px solid rgba(255,255,255,.12)}
-    .tag{display:inline-block;padding:7px 12px;border-radius:999px;background:#eaf5ff;color:var(--blue);font-weight:900;font-size:12px;margin-bottom:14px}
-    .advanced .tag{background:rgba(25,185,255,.12);color:#5dceff}
-    .course h3{font-size:26px;margin-bottom:6px}
-    .price{font-size:28px;font-weight:900;margin:15px 0}.price small{font-size:14px;font-weight:600;color:#71809a}
-    .advanced .price{color:#5dceff}.old{text-decoration:line-through;color:#9ca8ba;font-size:15px;margin-right:8px}
-    .course ul{list-style:none;margin:18px 0}.course li{padding:7px 0;font-size:14px}.course li:before{content:"✓";color:var(--blue);font-weight:900;margin-right:9px}
-    .advanced li:before{color:#5dceff}
-    .course-note{font-size:13px;color:#71809a;margin-top:10px}.advanced .course-note{color:#c7d5ed}
-    .why{background:#fff}
-    .why-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:15px}
-    .why-item{padding:25px;border-radius:18px;background:#f8fbff;border:1px solid var(--line)}
-    .why-item b{display:block;font-size:17px;color:var(--navy);margin-bottom:6px}.why-item span{font-size:13px;color:var(--muted)}
-    .contact{background:#f5f8fc}
-    .contact-grid{display:grid;grid-template-columns:1fr .9fr;gap:28px}
-    .contact-list{display:grid;gap:12px;margin-top:20px}
-    .contact-row{display:flex;gap:14px;align-items:center;padding:15px;background:#fff;border:1px solid var(--line);border-radius:14px}
-    .contact-row b{display:block}.contact-row span{font-size:13px;color:var(--muted)}
-    form{display:grid;gap:12px} input,textarea,select{width:100%;border:1px solid var(--line);border-radius:12px;padding:14px;font:inherit;background:#fff;color:var(--ink)} textarea{min-height:125px;resize:vertical}
-    footer{background:#041332;color:#c7d5ed;padding:35px 0}
-    .footer-grid{display:flex;justify-content:space-between;gap:30px;align-items:center}.footer-brand{color:#fff;font-weight:900;font-size:18px}.footer-grid small{display:block;margin-top:5px;color:#93a6c5}
-    .socials{display:flex;gap:12px;flex-wrap:wrap}.socials a{padding:8px 12px;border:1px solid rgba(255,255,255,.15);border-radius:10px;font-size:12px}
-    .copyright{border-top:1px solid rgba(255,255,255,.1);margin-top:25px;padding-top:18px;font-size:12px;text-align:center}
-    @media(max-width:900px){.hero-grid,.about-grid,.training-grid,.contact-grid{grid-template-columns:1fr}.cards{grid-template-columns:repeat(2,1fr)}.why-grid{grid-template-columns:repeat(2,1fr)}.navlinks{display:none}.menu{display:block}.navlinks.open{display:flex;position:absolute;top:78px;left:0;right:0;background:#fff;padding:18px 4%;flex-direction:column;align-items:flex-start;border-bottom:1px solid var(--line)}}
-    @media(max-width:560px){.brand img{width:190px}.hero{padding:60px 0}.hero-card{padding:25px}.cards,.why-grid{grid-template-columns:1fr}.section-head{display:block}.section-head p{margin-top:12px}.footer-grid{display:block}.socials{margin-top:18px}.mini-grid{grid-template-columns:1fr}}
-  </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ZAKVORA Technologies Limited — Data, Research, AI &amp; Digital Skills</title>
+<meta name="description" content="ZAKVORA Technologies Limited provides practical solutions in Data Analytics, Research, Artificial Intelligence, Digital Innovation and ICT Training, based in Abuja, Nigeria.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;0,9..144,600;1,9..144,500&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="icon" type="image/png" href="assets/zakvora-icon.png">
+<style>
+  :root{
+    --ink:#10201A;
+    --ink-soft:#1B2E24;
+    --paper:#F0E9D8;
+    --paper-dim:#E7DFC9;
+    --gold:#C99A3B;
+    --gold-soft:#E3C27E;
+    --emerald:#2E6B57;
+    --text-on-paper:#182018;
+    --muted:#5B6B62;
+    --muted-on-ink:#9FB3A6;
+    --line:#D7CBAA;
+    --line-on-ink:#2C4438;
+    --max:1180px;
+    --serif:'Fraunces', Georgia, serif;
+    --sans:'Space Grotesk', 'Segoe UI', sans-serif;
+  }
+
+  *{box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{
+    margin:0;
+    background:var(--paper);
+    color:var(--text-on-paper);
+    font-family:var(--sans);
+    font-size:16px;
+    line-height:1.5;
+    -webkit-font-smoothing:antialiased;
+  }
+  img{max-width:100%;display:block;}
+  a{color:inherit;}
+  .wrap{max-width:var(--max); margin:0 auto; padding:0 28px;}
+
+  ::selection{background:var(--gold-soft); color:var(--ink);}
+
+  /* focus visibility */
+  a:focus-visible, button:focus-visible{
+    outline:2px solid var(--emerald);
+    outline-offset:3px;
+  }
+
+  h1,h2,h3{
+    font-family:var(--serif);
+    font-weight:500;
+    margin:0;
+    letter-spacing:-0.01em;
+  }
+
+  .num{
+    font-variant-numeric: tabular-nums;
+    font-feature-settings: "tnum" 1;
+  }
+
+  /* ---------- Axis divider (subject-grounded divider device) ---------- */
+  .axis{
+    display:flex;
+    align-items:center;
+    gap:10px;
+    color:var(--muted);
+    font-size:13px;
+  }
+  .axis .tick{
+    width:1px;
+    height:14px;
+    background:currentColor;
+    opacity:.5;
+  }
+  .axis .rule{
+    flex:1;
+    height:1px;
+    background:var(--line);
+  }
+  .on-ink .axis .rule{background:var(--line-on-ink);}
+
+  /* ---------- Nav ---------- */
+  header.site{
+    position:sticky; top:0; z-index:40;
+    background:rgba(240,233,216,0.92);
+    backdrop-filter:blur(8px);
+    border-bottom:1px solid var(--line);
+  }
+  .nav{
+    display:flex; align-items:center; justify-content:space-between;
+    padding:18px 28px;
+    max-width:var(--max); margin:0 auto;
+  }
+  .brand{
+    display:flex; align-items:center; gap:10px;
+    font-family:var(--serif); font-weight:600; font-size:19px;
+    text-decoration:none; color:var(--ink);
+  }
+  .brand-mark{width:26px; height:26px; flex-shrink:0; object-fit:contain;}
+  .nav-links{
+    display:flex; gap:30px; list-style:none; margin:0; padding:0;
+    font-size:14.5px;
+  }
+  .nav-links a{text-decoration:none; color:var(--text-on-paper); position:relative; padding-bottom:3px;}
+  .nav-links a::after{
+    content:""; position:absolute; left:0; right:0; bottom:0; height:1.5px;
+    background:var(--emerald); transform:scaleX(0); transform-origin:left;
+    transition:transform .25s ease;
+  }
+  .nav-links a:hover::after{transform:scaleX(1);}
+  .nav-cta{
+    display:inline-flex; align-items:center; gap:8px;
+    background:var(--ink); color:var(--paper);
+    padding:10px 18px; border-radius:3px;
+    text-decoration:none; font-size:14px; font-weight:500;
+    white-space:nowrap;
+  }
+  .nav-toggle{display:none;}
+
+  @media (max-width:860px){
+    .nav-links{display:none;}
+    .nav-cta{padding:9px 14px; font-size:13px;}
+  }
+
+  /* ---------- Hero ---------- */
+  .hero{
+    background:var(--ink);
+    color:var(--paper);
+    position:relative;
+    overflow:hidden;
+    background-image:
+      linear-gradient(var(--line-on-ink) 1px, transparent 1px),
+      linear-gradient(90deg, var(--line-on-ink) 1px, transparent 1px);
+    background-size:48px 48px;
+    background-position:center -1px;
+  }
+  .hero::before{
+    content:"";
+    position:absolute; inset:0;
+    background:radial-gradient(ellipse 70% 60% at 30% 20%, rgba(16,32,26,0) 0%, var(--ink) 78%);
+  }
+  .hero-inner{
+    position:relative; z-index:1;
+    max-width:var(--max); margin:0 auto; padding:96px 28px 64px;
+    display:grid; grid-template-columns:1.05fr 0.95fr; gap:48px;
+    align-items:center;
+  }
+  .eyebrow-plain{
+    font-size:14px; color:var(--gold-soft); margin-bottom:18px;
+  }
+  .hero h1{
+    font-size:clamp(38px, 5.2vw, 60px);
+    line-height:1.05;
+    color:var(--paper);
+    max-width:12.5ch;
+  }
+  .hero h1 em{
+    font-style:italic; color:var(--gold-soft); font-weight:500;
+  }
+  .hero p.lede{
+    margin:24px 0 0;
+    font-size:17px;
+    color:var(--muted-on-ink);
+    max-width:46ch;
+    line-height:1.6;
+  }
+  .hero-ctas{
+    display:flex; gap:14px; margin-top:34px; flex-wrap:wrap;
+  }
+  .btn{
+    display:inline-flex; align-items:center; gap:8px;
+    padding:13px 22px;
+    border-radius:3px;
+    font-size:14.5px; font-weight:500;
+    text-decoration:none;
+    border:1px solid transparent;
+    cursor:pointer;
+    font-family:var(--sans);
+  }
+  .btn-primary{background:var(--gold); color:var(--ink);}
+  .btn-primary:hover{background:var(--gold-soft);}
+  .btn-ghost{border-color:var(--line-on-ink); color:var(--paper);}
+  .btn-ghost:hover{border-color:var(--muted-on-ink);}
+
+  .hero-stats{
+    display:flex; gap:28px; margin-top:44px;
+    padding-top:22px; border-top:1px solid var(--line-on-ink);
+  }
+  .hero-stats div{font-size:13px; color:var(--muted-on-ink);}
+  .hero-stats strong{
+    display:block; font-family:var(--serif); font-size:24px; color:var(--paper);
+    font-weight:500;
+  }
+
+  /* chart */
+  .chart-card{
+    background:var(--ink-soft);
+    border:1px solid var(--line-on-ink);
+    border-radius:4px;
+    padding:22px 22px 16px;
+  }
+  .chart-label{
+    display:flex; justify-content:space-between; align-items:baseline;
+    font-size:12.5px; color:var(--muted-on-ink); margin-bottom:8px;
+  }
+  .chart-label .live{color:var(--gold-soft);}
+  svg.chart{width:100%; height:auto; display:block;}
+  .chart-caption{
+    font-size:12px; color:var(--muted-on-ink); margin-top:10px; line-height:1.5;
+  }
+
+  .pt{opacity:0; transform:scale(.4); transform-origin:center; animation:ptIn .5s cubic-bezier(.2,.8,.2,1) forwards;}
+  .trend{stroke-dasharray:340; stroke-dashoffset:340; animation:draw 1.1s cubic-bezier(.2,.7,.2,1) forwards;}
+  .axline{opacity:0; animation:fadeIn .6s ease forwards;}
+  @keyframes ptIn{to{opacity:1; transform:scale(1);}}
+  @keyframes draw{to{stroke-dashoffset:0;}}
+  @keyframes fadeIn{to{opacity:1;}}
+
+  @media (prefers-reduced-motion: reduce){
+    .pt, .trend, .axline{animation:none !important; opacity:1 !important; stroke-dashoffset:0 !important; transform:none !important;}
+  }
+
+  @media (max-width:900px){
+    .hero-inner{grid-template-columns:1fr; padding-top:64px;}
+    .hero-stats{flex-wrap:wrap; row-gap:16px;}
+  }
+
+  /* ---------- Section shell ---------- */
+  section{padding:88px 0;}
+  .section-head{
+    display:grid; grid-template-columns:0.9fr 1.4fr; gap:40px;
+    margin-bottom:48px;
+    align-items:end;
+  }
+  .section-head h2{font-size:clamp(28px,3.2vw,38px); line-height:1.15;}
+  .section-head .desc{color:var(--muted); font-size:15.5px; max-width:44ch; line-height:1.6;}
+  @media (max-width:760px){
+    .section-head{grid-template-columns:1fr;}
+  }
+
+  /* ---------- About ---------- */
+  .about-grid{
+    display:grid; grid-template-columns:1fr 1fr; gap:56px;
+  }
+  .about-copy p{color:var(--text-on-paper); font-size:16px; line-height:1.75; max-width:52ch;}
+  .mv-list{list-style:none; margin:28px 0 0; padding:0; display:flex; flex-direction:column; gap:22px;}
+  .mv-list li{padding-left:0;}
+  .mv-list h3{font-size:15px; font-weight:600; font-family:var(--sans); color:var(--emerald); margin-bottom:6px;}
+  .mv-list p{margin:0; font-size:15px; color:var(--text-on-paper); line-height:1.65; max-width:44ch;}
+
+  /* ---------- Services table ---------- */
+  .service-table{
+    border-top:1px solid var(--line);
+  }
+  .service-row{
+    display:grid; grid-template-columns:190px 1fr 240px;
+    gap:24px;
+    padding:26px 0;
+    border-bottom:1px solid var(--line);
+    align-items:baseline;
+  }
+  .service-row .n{
+    font-family:var(--serif); font-size:15px; color:var(--emerald); font-weight:500;
+  }
+  .service-row h3{font-family:var(--sans); font-size:18px; font-weight:600;}
+  .service-row .what{color:var(--muted); font-size:14.5px; line-height:1.6; margin-top:6px;}
+  .service-row .who{
+    font-size:13px; color:var(--muted); text-align:right; line-height:1.6;
+  }
+  @media (max-width:760px){
+    .service-row{grid-template-columns:1fr; gap:8px;}
+    .service-row .who{text-align:left;}
+  }
+
+  /* ---------- Training ---------- */
+  .training-grid{
+    display:grid; grid-template-columns:1fr 1fr; gap:2px;
+    background:var(--line);
+    border:1px solid var(--line);
+  }
+  .training-card{
+    background:var(--paper); padding:34px;
+  }
+  .training-card.advanced{background:var(--ink); color:var(--paper);}
+  .tc-tag{font-size:12.5px; color:var(--emerald); margin-bottom:10px;}
+  .advanced .tc-tag{color:var(--gold-soft);}
+  .training-card h3{font-size:23px; margin-bottom:6px;}
+  .price-row{display:flex; align-items:baseline; gap:10px; margin:14px 0 20px;}
+  .price-old{font-size:15px; text-decoration:line-through; color:var(--muted);}
+  .advanced .price-old{color:var(--muted-on-ink);}
+  .price-new{font-family:var(--serif); font-size:28px; font-weight:500;}
+  .price-free{font-family:var(--serif); font-size:28px; font-weight:500; color:var(--emerald);}
+  .tool-list{list-style:none; margin:0 0 22px; padding:0; display:flex; flex-direction:column; gap:12px;}
+  .tool-list li{font-size:14.5px; line-height:1.55; padding-left:18px; position:relative;}
+  .tool-list li::before{
+    content:""; position:absolute; left:0; top:8px; width:6px; height:1px; background:var(--emerald);
+  }
+  .advanced .tool-list li::before{background:var(--gold-soft);}
+  .tool-list b{font-weight:600;}
+  .training-card .btn{margin-top:6px;}
+
+  @media (max-width:760px){
+    .training-grid{grid-template-columns:1fr;}
+  }
+
+  /* ---------- Why ---------- */
+  .why-list{
+    display:grid; grid-template-columns:repeat(4,1fr); gap:0;
+    border-top:1px solid var(--line);
+    border-left:1px solid var(--line);
+  }
+  .why-item{
+    padding:30px 26px;
+    border-right:1px solid var(--line);
+    border-bottom:1px solid var(--line);
+  }
+  .why-item .mark{
+    width:20px; height:20px; margin-bottom:16px;
+  }
+  .why-item h3{font-family:var(--sans); font-size:15.5px; font-weight:600; margin-bottom:8px;}
+  .why-item p{font-size:14px; color:var(--muted); line-height:1.6; margin:0;}
+  @media (max-width:900px){
+    .why-list{grid-template-columns:1fr 1fr;}
+  }
+  @media (max-width:560px){
+    .why-list{grid-template-columns:1fr;}
+  }
+
+  /* ---------- Contact ---------- */
+  .contact{background:var(--ink); color:var(--paper);}
+  .contact .section-head .desc{color:var(--muted-on-ink);}
+  .contact-grid{
+    display:grid; grid-template-columns:1fr 1fr; gap:56px;
+  }
+  .contact-list{list-style:none; margin:0; padding:0; display:flex; flex-direction:column;}
+  .contact-list li{
+    border-bottom:1px solid var(--line-on-ink);
+    padding:18px 0;
+  }
+  .contact-list a{
+    display:flex; justify-content:space-between; align-items:center;
+    text-decoration:none; color:var(--paper); font-size:16px;
+  }
+  .contact-list .label{color:var(--muted-on-ink); font-size:13px;}
+  .contact-list a:hover .val{color:var(--gold-soft);}
+  .social-row{display:flex; gap:18px; margin-top:26px;}
+  .social-row a{
+    font-size:13.5px; color:var(--muted-on-ink); text-decoration:none;
+    border-bottom:1px solid transparent;
+  }
+  .social-row a:hover{color:var(--paper); border-color:var(--gold-soft);}
+  .location-block{
+    border:1px solid var(--line-on-ink); border-radius:4px; padding:26px;
+  }
+  .location-block .tag{font-size:12.5px; color:var(--gold-soft); margin-bottom:10px;}
+  .location-block h3{font-family:var(--serif); font-size:22px; margin-bottom:8px; font-weight:500;}
+  .location-block p{font-size:14.5px; color:var(--muted-on-ink); line-height:1.6; margin:0;}
+
+  @media (max-width:760px){
+    .contact-grid{grid-template-columns:1fr;}
+  }
+
+  /* ---------- Footer ---------- */
+  footer{
+    background:var(--ink); color:var(--muted-on-ink);
+    border-top:1px solid var(--line-on-ink);
+    padding:26px 0;
+    font-size:12.5px;
+  }
+  .footer-row{
+    display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:10px;
+  }
+</style>
 </head>
 <body>
-<header>
-  <div class="container nav">
-    <a class="brand" href="#home"><img src="logo.png" alt="ZAKVORA Technologies Limited"></a>
-    <button class="menu" aria-label="Open menu" onclick="document.querySelector('.navlinks').classList.toggle('open')">☰</button>
-    <nav class="navlinks">
-      <a href="#about">About</a><a href="#services">Services</a><a href="#training">Training</a><a href="#why">Why ZAKVORA</a><a href="#contact">Contact</a>
-      <a class="navcta" href="https://wa.me/2349073872804" target="_blank">WhatsApp Us</a>
-    </nav>
-  </div>
+
+<header class="site">
+  <nav class="nav">
+    <a href="#top" class="brand">
+      <img class="brand-mark" src="assets/zakvora-icon.png" alt="" width="26" height="26">
+      ZAKVORA
+    </a>
+    <ul class="nav-links">
+      <li><a href="#about">About</a></li>
+      <li><a href="#services">Services</a></li>
+      <li><a href="#training">Training</a></li>
+      <li><a href="#why">Why ZAKVORA</a></li>
+    </ul>
+    <a class="nav-cta" href="#contact">Talk to us</a>
+  </nav>
 </header>
 
-<main id="home">
-<section class="hero">
-  <div class="container hero-grid">
-    <div>
-      <div class="eyebrow">Technology • Data • Innovation</div>
-      <h1>Turn <span>Data</span> Into Real Solutions.</h1>
-      <p>ZAKVORA Technologies Limited provides practical solutions in Data Analytics, Research, Artificial Intelligence, Digital Innovation and ICT — helping individuals, students, professionals and businesses learn, build and grow.</p>
-      <div class="actions">
-        <a class="btn btn-primary" href="#training">Explore Training →</a>
-        <a class="btn btn-secondary" href="#contact">Talk to Us</a>
-      </div>
-    </div>
-    <div class="hero-card">
-      <h2>Smarter Data.<br>Better Decisions.<br><span style="color:#19b9ff">Greater Impact.</span></h2>
-      <p>Practical, accessible and results-focused technology services for learning, research and business.</p>
-      <div class="mini-grid">
-        <div class="mini"><strong>Data</strong><span>Analytics & Reporting</span></div>
-        <div class="mini"><strong>Research</strong><span>Academic & Business Support</span></div>
-        <div class="mini"><strong>AI</strong><span>Practical AI Solutions</span></div>
-        <div class="mini"><strong>ICT</strong><span>Digital Skills Training</span></div>
-      </div>
-    </div>
-  </div>
-</section>
+<main id="top">
 
-<section id="about" class="about">
-  <div class="container">
-    <div class="section-head"><div><div class="eyebrow">About ZAKVORA</div><h2>Technology with a practical purpose.</h2></div><p>We combine data, research and digital technology to help people solve problems, improve productivity and develop relevant skills.</p></div>
-    <div class="about-grid">
-      <div class="panel"><h3>Our Mission</h3><p>To make data and technology more practical, understandable and useful by providing reliable analytics, research support, AI solutions, digital innovation and skills training.</p></div>
-      <div class="panel"><h3>Our Vision</h3><p>To grow into a trusted technology company that empowers people and organizations with data, research, AI and digital skills for sustainable growth and innovation.</p></div>
-    </div>
-  </div>
-</section>
-
-<section id="services" class="services">
-  <div class="container">
-    <div class="section-head"><div><div class="eyebrow">What We Do</div><h2>Our Services</h2></div><p>Focused services built around practical skills, useful insights and digital solutions.</p></div>
-    <div class="cards">
-      <div class="card"><div class="icon">▥</div><h3>Data Analytics</h3><p>Data cleaning, analysis, visualization, reporting and insight generation.</p></div>
-      <div class="card"><div class="icon">⌕</div><h3>Research Support</h3><p>Research assistance, literature search, data analysis, reporting and documentation.</p></div>
-      <div class="card"><div class="icon">AI</div><h3>AI Solutions</h3><p>Practical AI tools and workflows for learning, research, productivity and business.</p></div>
-      <div class="card"><div class="icon">✦</div><h3>Digital Innovation</h3><p>Technology-driven ideas and digital solutions designed around real needs.</p></div>
-      <div class="card"><div class="icon">▣</div><h3>ICT Training</h3><p>Hands-on digital skills training for students, professionals and teams.</p></div>
-    </div>
-  </div>
-</section>
-
-<section id="training" class="training">
-  <div class="container">
-    <div class="section-head"><div><div class="eyebrow" style="color:#5dceff">ZAKVORA Academy</div><h2>Professional Data Analysis Training</h2></div><p>Learn practical tools, work with real data and build skills you can apply in school, research, business and your career.</p></div>
-    <div class="training-grid">
-      <article class="course">
-        <span class="tag">BEGINNERS CLASS • FREE</span>
-        <h3>Data Analysis for Beginners</h3>
-        <div class="price">FREE <small>registration</small></div>
-        <ul>
-          <li><b>Microsoft Excel:</b> data entry, cleaning, formulas, pivot tables, charts & dashboards</li>
-          <li><b>IBM SPSS:</b> data entry & management, descriptive statistics, inferential statistics, hypothesis testing, regression & reporting</li>
-          <li>Hands-on exercises and guided practice</li>
-          <li>Certificate for participants</li>
-        </ul>
-        <p class="course-note">A practical starting point for students, researchers and anyone beginning their data journey.</p>
-      </article>
-      <article class="course advanced">
-        <span class="tag">ADVANCED CLASS • PROMO</span>
-        <h3>Advanced Data Analysis & Visualization</h3>
-        <div class="price"><span class="old">₦50,000</span>₦15,000 <small style="color:#c7d5ed">promo</small></div>
-        <ul>
-          <li><b>Power BI:</b> data import, transformation, modeling, DAX, dashboards & reporting</li>
-          <li><b>MySQL:</b> database design, SQL queries, data manipulation, joins & relationships</li>
-          <li><b>Python:</b> fundamentals, Pandas, visualization, analysis & automation</li>
-          <li><b>R:</b> data structures, manipulation, visualization, statistics & reporting</li>
-          <li>Hands-on projects and guided practice</li>
-          <li>Certificate for participants</li>
-        </ul>
-        <p class="course-note">Designed for learners ready to move beyond the basics and work with more advanced analytics tools.</p>
-      </article>
-    </div>
-    <div class="actions" style="justify-content:center;margin-top:30px"><a class="btn btn-primary" href="https://wa.me/2349073872804?text=Hello%20ZAKVORA%2C%20I%20want%20to%20register%20for%20the%20Data%20Analysis%20Training." target="_blank">Register on WhatsApp →</a></div>
-  </div>
-</section>
-
-<section id="why" class="why">
-  <div class="container">
-    <div class="section-head"><div><div class="eyebrow">Why ZAKVORA</div><h2>Built around practical results.</h2></div></div>
-    <div class="why-grid">
-      <div class="why-item"><b>Practical Learning</b><span>Learn skills you can apply to real tasks and projects.</span></div>
-      <div class="why-item"><b>Clear Guidance</b><span>Simple explanations and structured support as you learn.</span></div>
-      <div class="why-item"><b>Modern Tools</b><span>Exposure to relevant analytics and digital technologies.</span></div>
-      <div class="why-item"><b>Career Growth</b><span>Build practical skills and a stronger professional portfolio.</span></div>
-    </div>
-  </div>
-</section>
-
-<section id="contact" class="contact">
-  <div class="container">
-    <div class="section-head"><div><div class="eyebrow">Contact</div><h2>Let's work together.</h2></div><p>For training, analytics, research support or digital solutions, reach out directly.</p></div>
-    <div class="contact-grid">
+  <!-- HERO -->
+  <section class="hero" style="padding:0;">
+    <div class="hero-inner">
       <div>
-        <div class="contact-list">
-          <a class="contact-row" href="tel:+2349073872804"><div>📞</div><div><b>+234 907 387 2804</b><span>WhatsApp / Call</span></div></a>
-          <a class="contact-row" href="tel:+2349031337139"><div>📞</div><div><b>+234 903 133 7139</b><span>WhatsApp / Call</span></div></a>
-          <a class="contact-row" href="mailto:info@zakvora.com"><div>✉️</div><div><b>zakvoratechnologieslimited@gmail.com</b><span>Email</span></div></a>
-          <div class="contact-row"><div>📍</div><div><b>Abuja, Nigeria</b><span>Serving students, researchers, professionals and businesses</span></div></div>
+        <div class="eyebrow-plain">Abuja, Nigeria</div>
+        <h1>Turn raw data into decisions you can act on<em>.</em></h1>
+        <p class="lede">ZAKVORA Technologies Limited helps students, researchers, professionals and businesses work with data, research and digital tools — practically, and from the ground up.</p>
+        <div class="hero-ctas">
+          <a href="https://docs.google.com/forms/d/e/1FAIpQLSefTYhtO5hGKfilJlCCppqMdBUMI8HnRJL7Nir_20RUgPI4AQ/viewform?usp=publish-editor" class="btn btn-primary" target="_blank" rel="noopener">Apply online</a>
+          <a href="#contact" class="btn btn-ghost">Get in touch</a>
+        </div>
+        <div class="hero-stats">
+          <div><strong class="num">5</strong>service areas</div>
+          <div><strong class="num">2</strong>training tracks</div>
+          <div><strong>₦0</strong>to start learning</div>
         </div>
       </div>
-      <div class="panel">
-        <h3>Send an enquiry</h3>
-        <form onsubmit="sendMessage(event)">
-          <input id="name" placeholder="Your name" required>
-          <input id="email" type="email" placeholder="Email address" required>
-          <select id="service"><option>Data Analytics</option><option>Research Support</option><option>AI Solutions</option><option>Digital Innovation</option><option>ICT / Data Analysis Training</option></select>
-          <textarea id="message" placeholder="Tell us what you need..." required></textarea>
-          <button class="btn btn-primary" type="submit">Send via WhatsApp →</button>
-        </form>
+
+      <div class="chart-card">
+        <div class="chart-label">
+          <span>Raw observations → fitted trend</span>
+          <span class="live">● live read</span>
+        </div>
+        <svg class="chart" viewBox="0 0 400 220" aria-hidden="true">
+          <line class="axline" x1="30" y1="10" x2="30" y2="190" stroke="#2C4438" stroke-width="1" style="animation-delay:.1s"/>
+          <line class="axline" x1="30" y1="190" x2="390" y2="190" stroke="#2C4438" stroke-width="1" style="animation-delay:.1s"/>
+          <!-- scatter points -->
+          <circle class="pt" cx="55" cy="150" r="4" fill="#9FB3A6" style="animation-delay:.35s"/>
+          <circle class="pt" cx="95" cy="165" r="4" fill="#9FB3A6" style="animation-delay:.42s"/>
+          <circle class="pt" cx="130" cy="120" r="4" fill="#9FB3A6" style="animation-delay:.49s"/>
+          <circle class="pt" cx="165" cy="135" r="4" fill="#9FB3A6" style="animation-delay:.56s"/>
+          <circle class="pt" cx="200" cy="95" r="4" fill="#9FB3A6" style="animation-delay:.63s"/>
+          <circle class="pt" cx="235" cy="100" r="4" fill="#9FB3A6" style="animation-delay:.70s"/>
+          <circle class="pt" cx="270" cy="70" r="4" fill="#9FB3A6" style="animation-delay:.77s"/>
+          <circle class="pt" cx="305" cy="60" r="4" fill="#9FB3A6" style="animation-delay:.84s"/>
+          <circle class="pt" cx="340" cy="40" r="4" fill="#9FB3A6" style="animation-delay:.91s"/>
+          <circle class="pt" cx="370" cy="30" r="4" fill="#9FB3A6" style="animation-delay:.98s"/>
+          <!-- trend line -->
+          <polyline class="trend" points="50,155 100,148 150,128 200,108 250,88 300,62 385,25"
+                     fill="none" stroke="#C99A3B" stroke-width="2.5" style="animation-delay:1.05s"/>
+        </svg>
+        <div class="chart-caption">This is the shape of most engagements: scattered inputs, one clear line through them — then a plan built on it.</div>
       </div>
     </div>
-  </div>
-</section>
-</main>
+  </section>
 
-<footer>
-  <div class="container">
-    <div class="footer-grid">
-      <div><div class="footer-brand">ZAKVORA TECHNOLOGIES LIMITED</div><small>Data Analytics • Research • AI • Digital Innovation</small></div>
-      <div class="socials"><a href="https://wa.me/2349073872804" target="_blank">WhatsApp</a><a href="https://www.instagram.com/zakvora_tech/" target="_blank">Instagram</a><a href="https://www.linkedin.com/" target="_blank">LinkedIn</a><a href="https://www.youtube.com/@zakvoratech" target="_blank">YouTube</a></div>
+  <!-- ABOUT -->
+  <section id="about">
+    <div class="wrap">
+      <div class="axis" style="margin-bottom:40px;"><span class="tick"></span>About<span class="rule"></span></div>
+      <div class="about-grid">
+        <div class="about-copy">
+          <h2 style="font-size:clamp(26px,3vw,34px); margin-bottom:20px; max-width:14ch;">Technology with a practical purpose.</h2>
+          <p>We combine data, research and digital technology to help people solve real problems, improve how they work, and build skills that hold up outside a classroom.</p>
+          <p>Every engagement starts from what you're trying to get done — a dataset that needs to make sense, a research question that needs support, or a skill you're missing — and works backward from there.</p>
+        </div>
+        <ul class="mv-list">
+          <li>
+            <h3>Mission</h3>
+            <p>Make data and technology practical, understandable and useful — through reliable analytics, research support, AI solutions, digital innovation and hands-on training.</p>
+          </li>
+          <li>
+            <h3>Vision</h3>
+            <p>To grow into a trusted technology company that equips people and organisations with data, research, AI and digital skills for lasting, sustainable growth.</p>
+          </li>
+          <li>
+            <h3>Based in</h3>
+            <p>Abuja, Nigeria — working with students, researchers, professionals and businesses wherever they are.</p>
+          </li>
+        </ul>
+      </div>
     </div>
-    <div class="copyright">© 2026 ZAKVORA Technologies Limited. Smarter Data. Better Decisions. Greater Impact.</div>
-  </div>
-</footer>
+  </section>
 
-<script>
-function sendMessage(e){
-  e.preventDefault();
-  const name=document.getElementById('name').value.trim();
-  const email=document.getElementById('email').value.trim();
-  const service=document.getElementById('service').value;
-  const message=document.getElementById('message').value.trim();
-  const text=`Hello ZAKVORA Technologies Limited,%0A%0AName: ${encodeURIComponent(name)}%0AEmail: ${encodeURIComponent(email)}%0AService: ${encodeURIComponent(service)}%0A%0A${encodeURIComponent(message)}`;
-  window.open(`https://wa.me/2349073872804?text=${text}`,'_blank');
-}
-</script>
-</body>
-</html>
+  <!-- SERVICES -->
+  <section id="services" style="background:var(--paper-dim);">
+    <div class="wrap">
+      <div class="section-head">
+        <h2>What we do</h2>
+        <p class="desc">Five focused areas, built around skills you can use and problems you actually have — not a generic service menu.</p>
+      </div>
+      <div class="service-table">
+        <div class="service-row">
+          <div class="n">01 — Data</div>
+          <div><h3>Data Analytics</h3><div class="what">Cleaning, analysis, visualization, reporting and insight generation — from a messy spreadsheet to a decision you can defend.</div></div>
+          <div class="who">Businesses, researchers, teams</div>
+        </div>
+        <div class="service-row">
+          <div class="n">02 — Research</div>
+          <div><h3>Research Support</h3><div class="what">Literature search, data analysis, reporting and documentation support for academic and business research.</div></div>
+          <div class="who">Students, academics, institutions</div>
+        </div>
+        <div class="service-row">
+          <div class="n">03 — AI</div>
+          <div><h3>AI Solutions</h3><div class="what">Practical AI tools and workflows applied to real learning, research and productivity problems — not AI for its own sake.</div></div>
+          <div class="who">Professionals, businesses</div>
+        </div>
+        <div class="service-row">
+          <div class="n">04 — Innovation</div>
+          <div><h3>Digital Innovation</h3><div class="what">Technology-driven ideas and digital solutions scoped around a need you already have.</div></div>
+          <div class="who">Organizations, founders</div>
+        </div>
+        <div class="service-row">
+          <div class="n">05 — ICT</div>
+          <div><h3>ICT Training</h3><div class="what">Hands-on digital skills training, delivered so it transfers directly into school, research or work.</div></div>
+          <div class="who">Students, professionals, teams</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- TRAINING -->
+  <section id="training">
+    <div class="wrap">
+      <div class="section-head">
+        <h2>zakvoratech.ltd
